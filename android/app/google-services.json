@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "798287110298",
+    "project_id": "haro-chat",
+    "storage_bucket": "haro-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798287110298:android:5d89514adddc42e2fabf23",
+        "android_client_info": {
+          "package_name": "com.example.haro_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApzMC5oOfz5ESzQm_lpe0xtEYTlP-OCU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
