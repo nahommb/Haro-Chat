@@ -30,12 +30,8 @@ class _ChatScreenState extends State<ChatScreen> {
       floatingActionButton: FloatingActionButton(
         child: Text("Add"),
         onPressed: (){
-          FirebaseFirestore.instance.collection('chats/4pMZzbx7Xp6f3zPshOwl/messages').snapshots().listen((data) {
-            data.docs.forEach((dcs){
-              print(dcs['text']);
-            });
-
-            // print("Neymaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrr10");
+          FirebaseFirestore.instance.collection('chats/4pMZzbx7Xp6f3zPshOwl/messages').add({
+            'text':"first message"
           });
 
         },

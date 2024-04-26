@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:haro_chat/screen/auth_screen.dart';
 import 'package:haro_chat/screen/chat_screen.dart';
 
 
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChatScreen(),
+      home: AuthScreen(),
     );
   }
 }
