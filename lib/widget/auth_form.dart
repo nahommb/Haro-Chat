@@ -3,6 +3,11 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+
+  final void Function(String email,String username,String password,bool isLogin) submitFn;
+
+  AuthForm(this.submitFn);
+
   @override
   State<AuthForm> createState() => _AuthFormState();
 }
@@ -25,7 +30,11 @@ void _trySubmit(){
 
     if(isValid!){
       _formKey.currentState?.save();
-       print('yess');
+       widget.submitFn(
+         userEmail,
+         userName,
+         userPassword
+       );
    }
 }
 
@@ -42,7 +51,7 @@ void _trySubmit(){
               child: Column(
                 children: [
                   TextFormField(
-
+                    key: ValueKey('email'),
                     validator: (value){
                       if(value!.isEmpty || !value!.contains('@')){
                         return 'Please enter valid email address';
@@ -55,7 +64,9 @@ void _trySubmit(){
                       userEmail = value!;
                     },
                 ),
+                  if(!isLogin)
                   TextFormField(
+                    key: ValueKey('username'),
                       validator: (value){
                         if(value!.isEmpty){
                           return 'Please enter username';
@@ -65,6 +76,7 @@ void _trySubmit(){
                     decoration: InputDecoration(labelText:'Username' ),
                   ),
                   TextFormField(
+                     key: ValueKey('password'),
                       validator: (value){
                         if(value!.isEmpty || value.length<4){
                           return 'Please enter at list 4 character ';
