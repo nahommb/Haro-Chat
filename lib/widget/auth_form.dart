@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
 
-  final void Function(String email,String username,String password,bool isLogin) submitFn;
+  final void Function(String email,String username,String password,bool isLogin , BuildContext ctx) submitFn;
+  final isLoading ;
 
-  AuthForm(this.submitFn);
+  AuthForm({required this.submitFn,required this.isLoading});
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -19,7 +20,7 @@ class _AuthFormState extends State<AuthForm> {
 
   late String userPassword;
 
-  late String userName;
+  late String userName ='';
 
 final _formKey = GlobalKey<FormState>();
 
@@ -31,9 +32,11 @@ void _trySubmit(){
     if(isValid!){
       _formKey.currentState?.save();
        widget.submitFn(
-         userEmail,
-         userName,
-         userPassword
+         userEmail.trim(),
+         userName.trim(),
+         userPassword.trim(),
+         isLogin,
+         context
        );
    }
 }
@@ -74,6 +77,9 @@ void _trySubmit(){
                         return null;
                       },
                     decoration: InputDecoration(labelText:'Username' ),
+                    onSaved: (val){
+                      userName= val!;
+                    },
                   ),
                   TextFormField(
                      key: ValueKey('password'),
@@ -84,13 +90,19 @@ void _trySubmit(){
                         return null;
                       },
                       decoration: InputDecoration(labelText:'Password' ),
+                    onSaved: (val){
+                       userPassword = val!;
+                    },
                     obscureText: true,
                   ),
                   SizedBox(height: 20,),
+                  if(widget.isLoading)CircularProgressIndicator(),
+                  if(!widget.isLoading)
                   ElevatedButton(onPressed: (){
                     _trySubmit();
                   }, child: Text(isLogin?'Login':'Signup')),
-                  TextButton(onPressed: (){
+                  if(!widget.isLoading)
+                    TextButton(onPressed: (){
                     setState(() {
                       isLogin = !isLogin;
                     });

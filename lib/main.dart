@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:haro_chat/screen/auth_screen.dart';
@@ -25,7 +27,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AuthScreen(),
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder(stream: FirebaseAuth.instance.authStateChanges(),builder: (context,userSnapshot){
+        if(userSnapshot.hasData){
+          return ChatScreen();
+        }
+        return AuthScreen();
+      },),
     );
   }
 }
