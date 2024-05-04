@@ -42,8 +42,9 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: Messages()),
+             Expanded(child: Messages()),
              NewMessage()
           ],
         ),
