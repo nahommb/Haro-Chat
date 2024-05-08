@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:haro_chat/widget/image_picker.dart';
 
 class AuthForm extends StatefulWidget {
 
@@ -53,6 +54,7 @@ void _trySubmit(){
               key: _formKey,
               child: Column(
                 children: [
+                  if(!isLogin)CustomImagePicker(),
                   TextFormField(
                     key: ValueKey('email'),
                     validator: (value){
