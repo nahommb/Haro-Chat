@@ -22,7 +22,7 @@ class _CustomImagePickerState extends State<CustomImagePicker> {
         print(imageFile.path);
         pickedImage = File(imageFile.path);
       });
-      widget.imagePickerFn;
+      widget.imagePickerFn(pickedImage!);
     }
   }
 

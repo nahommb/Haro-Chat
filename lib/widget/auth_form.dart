@@ -1,5 +1,5 @@
 
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:haro_chat/widget/image_picker.dart';
 
@@ -24,9 +24,17 @@ class _AuthFormState extends State<AuthForm> {
   late String userName ='';
 
 final _formKey = GlobalKey<FormState>();
+File?userImage ;
+
+void _pickedImage(File image){
+ userImage = image;
+}
 
 void _trySubmit(){
-
+   if(userImage==null && !isLogin){
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please pick image')));
+     return;
+   }
   // FocusScope.of(context).unfocus();
   final isValid = _formKey.currentState?.validate();
 
@@ -54,7 +62,7 @@ void _trySubmit(){
               key: _formKey,
               child: Column(
                 children: [
-                  if(!isLogin)CustomImagePicker(),
+                  if(!isLogin)CustomImagePicker(imagePickerFn: _pickedImage),
                   TextFormField(
                     key: ValueKey('email'),
                     validator: (value){
