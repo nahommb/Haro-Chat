@@ -1,8 +1,8 @@
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:haro_chat/widget/auth_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,7 +16,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   final _auth = FirebaseAuth.instance;
 
-  void _submitAuthForm ( String email,String username,String password,bool islogin,BuildContext ctx) async {
+  void _submitAuthForm ( String email,String username,String password,bool islogin,BuildContext ctx,File image) async {
     final _auth_result ;
 
     try{
@@ -31,7 +31,11 @@ class _AuthScreenState extends State<AuthScreen> {
       else{
         final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         _auth_result = userCredential.user;
+
       }
+     final ref = await FirebaseStorage.instance.ref().child('user_image').child(_auth_result.uid+'jpg');
+        ref.putFile(image);
+
       await FirebaseFirestore.instance.collection('users').doc(_auth_result.uid).set({
         'email':email,
         'username':username

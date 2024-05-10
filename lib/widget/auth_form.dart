@@ -5,7 +5,7 @@ import 'package:haro_chat/widget/image_picker.dart';
 
 class AuthForm extends StatefulWidget {
 
-  final void Function(String email,String username,String password,bool isLogin , BuildContext ctx) submitFn;
+  final void Function(String email,String username,String password,bool isLogin , BuildContext ctx,File image) submitFn;
   final isLoading ;
 
   AuthForm({required this.submitFn,required this.isLoading});
@@ -45,7 +45,8 @@ void _trySubmit(){
          userName.trim(),
          userPassword.trim(),
          isLogin,
-         context
+         context,
+         userImage!
        );
    }
 }
