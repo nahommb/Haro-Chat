@@ -24,8 +24,11 @@ class Messages extends StatelessWidget {
             reverse: true,
             itemCount: data?.length,
             itemBuilder: (ctx,index){
-              return MessageBubble(message_text:data?[index]['text'],
-                isMe: data?[index]['userId']== futureSnap.data?.uid,username: data?[index]['userName'],);
+              return MessageBubble(
+                message_text:data?[index]['text'],
+                isMe: data?[index]['userId']== futureSnap.data?.uid,
+                username: data?[index]['userName'],
+                userimage: data?[index]['userImage'],);
             },);
         },
       );

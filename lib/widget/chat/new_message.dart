@@ -20,8 +20,10 @@ class _NewMessageState extends State<NewMessage> {
      'text':new_message,
      'createdAt':Timestamp.now(),
      'userId':user?.uid,
-     'userName':userData['username'],
+     'userName':userData['userName'],
+     'userImage':userData['imageUrl']
    });
+
  }
   TextEditingController textEditingController = TextEditingController();
 

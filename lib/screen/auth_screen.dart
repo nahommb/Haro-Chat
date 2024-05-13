@@ -32,14 +32,17 @@ class _AuthScreenState extends State<AuthScreen> {
         final UserCredential userCredential = await _auth.createUserWithEmailAndPassword(email: email, password: password);
         _auth_result = userCredential.user;
 
+        final ref = await FirebaseStorage.instance.ref().child('user_image').child(_auth_result.uid+'.jpg');
+        await ref.putFile(image);
+        final imageUrl = await ref.getDownloadURL();
+        print('messsssssssssssssssssssssssiiiii${_auth_result.uid}');
+        await FirebaseFirestore.instance.collection('users').doc(_auth_result.uid).set({
+          'email':email,
+          'userName':username,
+          'imageUrl':imageUrl
+        });
       }
-     final ref = await FirebaseStorage.instance.ref().child('user_image').child(_auth_result.uid+'jpg');
-        ref.putFile(image);
 
-      await FirebaseFirestore.instance.collection('users').doc(_auth_result.uid).set({
-        'email':email,
-        'username':username
-      });
     }
     on FirebaseAuthException catch(err){
       String? message ='check your credentials';
