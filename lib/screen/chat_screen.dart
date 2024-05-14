@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:haro_chat/widget/chat/messages.dart';
 import 'package:haro_chat/widget/chat/new_message.dart';
 
@@ -12,6 +12,23 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    final FirebaseMessaging fbm = FirebaseMessaging.instance;
+    fbm.requestPermission();
+    FirebaseMessaging.onMessage.listen((event) {
+      print(event);
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {
+      print(event);
+    });
+
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

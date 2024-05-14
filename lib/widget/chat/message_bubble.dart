@@ -24,7 +24,7 @@ class MessageBubble extends StatelessWidget {
                     ),
                     child: Column(
                       children: [
-                        Text(username),
+                        Text(username,style: TextStyle(fontSize: 10,color: Colors.white,fontWeight: FontWeight.bold),),
                         SizedBox(height: 8,),
                         Text(message_text,textAlign: TextAlign.center,),
                       ],
