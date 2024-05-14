@@ -5,7 +5,7 @@ import 'package:haro_chat/widget/image_picker.dart';
 
 class AuthForm extends StatefulWidget {
 
-  final void Function(String email,String username,String password,bool isLogin , BuildContext ctx,File image) submitFn;
+  final void Function(String email,String username,String password,bool isLogin , BuildContext ctx,File? image) submitFn;
   final isLoading ;
 
   AuthForm({required this.submitFn,required this.isLoading});
@@ -21,10 +21,10 @@ class _AuthFormState extends State<AuthForm> {
 
   late String userPassword;
 
-  late String userName ='';
+  late String userName;
 
 final _formKey = GlobalKey<FormState>();
-File?userImage ;
+File? userImage ;
 
 void _pickedImage(File image){
  userImage = image;
@@ -37,7 +37,10 @@ void _trySubmit(){
    }
   // FocusScope.of(context).unfocus();
   final isValid = _formKey.currentState?.validate();
+   if(isLogin){
+     userName = '';
 
+   }
     if(isValid!){
       _formKey.currentState?.save();
        widget.submitFn(
@@ -46,7 +49,7 @@ void _trySubmit(){
          userPassword.trim(),
          isLogin,
          context,
-         userImage!
+         userImage
        );
    }
 }
@@ -67,7 +70,7 @@ void _trySubmit(){
                   TextFormField(
                     key: ValueKey('email'),
                     validator: (value){
-                      if(value!.isEmpty || !value!.contains('@')){
+                      if(value!.isEmpty || !value.contains('@')){
                         return 'Please enter valid email address';
                       }
                       return null;

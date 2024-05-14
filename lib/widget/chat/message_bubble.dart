@@ -15,7 +15,7 @@ class MessageBubble extends StatelessWidget {
           children: [
             FittedBox(
               child: Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.only(top: 44,left: 10,right: 10,bottom: 10),
                 child: Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -31,11 +31,14 @@ class MessageBubble extends StatelessWidget {
                     )),
               ),
             ),
-            Positioned(
-                child: CircleAvatar(backgroundImage: NetworkImage(userimage),)
-            )
+
           ],
-        )
+        ) ,
+        Positioned(
+            left: isMe?null:50,
+            right: isMe?50:null,
+            child: CircleAvatar(backgroundImage: NetworkImage(userimage),)
+        ),
       ],
     );
   }
